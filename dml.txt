@@ -1,0 +1,92 @@
+DML komandaları məlumatı manipulyasiya etmək üçündür. Yəni, biz dataları silə, düzəldə , bir söznən idarə eliyə biləriy.
+
+1) INSERT komandası
+	Cədvələ məlumat daxil etmək üçün istifadə olunur. Məsələn, Xeste cədvəlinə baxaq:
+		+----------+-------+------+
+		| Xeste_id | Xeste | Yash |
+		+----------+-------+------+
+		
+		> INSERT into Xeste values(1,"Reshad",18);
+		yazsaq, aşağıdakı nəticəni alarıq:
+		+----------+--------+------+
+		| Xeste_id | Xeste  | Yash |
+		+----------+--------+------+
+		| 1        | Reshad | 18   |
+		+----------+--------+------+
+
+	Sütuna NULL daxil etmək:
+		> INSERT into Xeste(Xeste_id, Xeste) values(2,"Aydan");
+	və ya
+		> INSERT into Xeste values(2,"Aydan",null);
+	Nəticə olaraq ekrana çıxacaq:
+		+----------+--------+------+
+		| Xeste_id | Xeste  | Yash |
+		+----------+--------+------+
+		| 1        | Reshad | 18   |
+		+----------+--------+------+
+		| 2        | Aydan  |      |
+		+----------+--------+------+
+
+2) UPDATE komandası
+	Bu komanda cədvəldəki müəyyən bir sıranı və ya sıraları yeniləmək üçündü.
+		> UPDATE Xeste set Yash=21 where Xeste_id=1;
+		+----------+--------+------+
+		| Xeste_id | Xeste  | Yash |
+		+----------+--------+------+
+		| 1        | Reshad | 21   |
+		+----------+--------+------+
+		| 2        | Aydan  |      |
+		+----------+--------+------+
+
+3) DELETE komandası
+	Bu komanda məlumatı cədvəldən silmək üçün istifadə olunur. Şərt işlədərək də yazmaq mümkündür.
+		> DELETE from Xeste;
+	Yuxarıdakı komanda Xeste cedvelində nə varsa, hamısını siləcəy.
+		> DELETE from Xeste where Xeste_id=2;
+	Bu komanda isə Xeste_id 2 olan sətri siləcəy.
+		+----------+--------+------+
+		| Xeste_id | Xeste  | Yash |
+		+----------+--------+------+
+		| 1        | Reshad | 21   |
+		+----------+--------+------+
+
+4) SELECT komandası
+	Bu komanda cədvəldəki istənilən məlumatı seçmək üçündü.
+		> SELECT Xeste_id, Xeste FROM Xeste WHERE Xeste_id=1;
+		+----------+--------+
+		| Xeste_id | Xeste  |
+		+----------+--------+
+		| 1        | Reshad |
+		+----------+--------+
+
+5) ORDER komandası
+	Məlumatları sıralamaq üçündü
+		+----------+--------+------+
+		| Xeste_id | Xeste  | Yash |
+		+----------+--------+------+
+		| 1        | Reshad | 21   |
+		+----------+--------+------+
+		| 2        | Aydan  | 16   |
+		+----------+--------+------+
+		| 3        | Murad  | 35   |
+		+----------+--------+------+
+		> SELECT Xeste_id, Xeste, Yash FROM Xeste WHERE Yash>18 ORDER BY Yash;
+		+----------+--------+------+
+		| Xeste_id | Xeste  | Yash |
+		+----------+--------+------+
+		| 1        | Reshad | 21   |
+		+----------+--------+------+
+		| 3        | Murad  | 35   |
+		+----------+--------+------+
+
+6) CREATE TABLE komandası
+	Yeni bir cədvəl yaratmaq üçün istifadə olunur.
+		> CREATE TABLE Sifarishler(
+		> Ad varchar(100),
+		> Soyad varchar(100),
+		> SifarishTarixi date
+		> );
+	Nəticə aşağıdakı kimidi:
+		+----+-------+----------------+
+		| Ad | Soyad | SifarishTarixi |
+		+----+-------+----------------+
